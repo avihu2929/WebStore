@@ -1,0 +1,81 @@
+﻿@model WhPhL.Models.ProductCategoryViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br>
+<head>
+    <link rel="stylesheet" href="StyleSheet.css" media="screen" />
+</head>
+
+<p>
+    <a asp-action="Create">Add Product</a>
+</p>
+
+    <form asp-controller="Products" asp-action="Index" method="get">
+        <div class="input-group">
+            <select asp-for="SelectedCategory" asp-items="Model.Categories">
+                <option value="">All</option>
+            </select>
+            <input type="text" name="SearchString">
+            
+                <input type="image" src="http://www.clker.com/cliparts/Y/x/X/j/U/f/search-button-without-text-md.png" alt=" Submit" style="width: 31px;" class="rounded-circle" />
+         
+        </div>
+</form>
+   
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[0].Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[0].Category)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[0].Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[0].Rating)
+                </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Products)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+
+                <td>
+                    <div class="stars-outer">
+                        <div class="stars-inner"></div>
+                        &#x02606;&#x02606;&#x02606;&#x02606;&#x02606;
+                    </div>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+
+
